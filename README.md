@@ -1,4 +1,4 @@
-rails.js
+rails-js
 ========
 
 I worked on several Rails projects and there were many cases when it felt overkill to use a framework like ``Angular`` or ``Ember``, because javascript was only needed in some parts of the application.
