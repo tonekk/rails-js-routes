@@ -24,7 +24,7 @@ Rails.app({
  // Define global helpers here
  helper: function() {
  },
-}
+},
  // Put in initial data
 {
   foo: 'bar'
