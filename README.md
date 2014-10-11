@@ -21,17 +21,17 @@ I came up with the conclusion to organize the javascript code like the ruby code
  */
  
 Rails.app({
-  // Define global helpers here
-  helper: function() {
-  },
-  // Put in initial data
-  {
-    foo: 'bar'
-  },
-  // A function that is executed before every action
-  function() {
-    console.log('beforeAll() executed');
-  }
+ // Define global helpers here
+ helper: function() {
+ },
+}
+ // Put in initial data
+{
+  foo: 'bar'
+},
+// A function that is executed before every action
+function() {
+ console.log('beforeAll() executed');
 });
 
 ```
