@@ -18,9 +18,8 @@ end
 # teaspoon must be executed inside the dummy rails app
 task :teaspoon do
   Dir.chdir('test/dummy/')
-  sh 'rake teaspoon'
+  sh 'bundle exec rake teaspoon'
 end
 
 # add teaspoon to default tasks
 task default: :test
-task default: :teaspoon
