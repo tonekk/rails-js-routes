@@ -1,6 +1,7 @@
 rails-js
 ========
 [![Build Status](https://travis-ci.org/tonekk/rails-js.svg)](https://travis-ci.org/tonekk/rails-js)
+[![Coverage Status](https://img.shields.io/coveralls/tonekk/rails-js.svg)](https://coveralls.io/r/tonekk/rails-js)
 [![Dependency Status](https://gemnasium.com/tonekk/rails-js.svg)](https://gemnasium.com/tonekk/rails-js)
 [![Gem Version](http://img.shields.io/gem/v/rails-js.svg)](https://rubygems.org/gems/rails-js)
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://tonekk.mit-license.org)
