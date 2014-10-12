@@ -136,3 +136,15 @@ In your layouts, put this line into the ``head``:
 <%= rails_js %>
 ```
 Also make sure to include ``rails`` in your ``application.js``.
+
+Testing
+=======
+
+Javascript tests are in ``test/dummy/spec/javascripts/rails-js_spec.js``.
+They are executed using ``rake teaspoon`` (by using the [teaspoon runner](https://github.com/modeset/teaspoon)).
+I'm still trying to get [travis to execute the teaspoon tests properly...](https://travis-ci.org/tonekk/rails-js/builds/37740824)
+
+Contributing
+============
+
+[Fork](https://github.com/tonekk/rails-js/fork) -> Commit -> Pull Request
