@@ -7,7 +7,8 @@
   var controllers = {},
       globalHelpers = {},
       namespaceHooks = {},
-      data = {};
+      data = {},
+      beforeAll = null;
 
   /*
    * Singleton that stores functions to create your apps' structure
@@ -15,17 +16,29 @@
   Rails = window.Rails || {};
 
   /*
+   * For testing. We want to start each test with emtpiness.
+   */
+  Rails.clear = function() {
+    controllers = {};
+    globalHelpers = {};
+    namespaceHooks = {};
+    data = {};
+    beforeAll = null;
+  };
+
+  /*
    * Creates a Rails application (the javascript part!)
    *
    * Pass global helper and initial data as params
    */
-  Rails.app = function(helpers, initialData, beforeAll) {
+  Rails.app = function(helpers, initialData, beforeHook) {
 
     /*
      * Store everything in our local variables
      */
     globalHelpers = helpers;
     data = initialData;
+    beforeAll = beforeHook;
 
     /*
      * Set event listener to execute controllers' javascript
@@ -38,13 +51,6 @@
 
       if(Rails.config && Rails.config.test) {
         return;
-      }
-
-      /*
-       * Also execute beforeAll() hook if defined
-       */
-      if(beforeAll && typeof(beforeAll) == 'function') {
-        beforeAll();
       }
 
       Rails.execute();
@@ -99,6 +105,13 @@
     var controller,
         namespaceHook,
         controllerName = this.config.controller;
+
+    /*
+     * Execute beforeAll() hook if defined
+     */
+    if(beforeAll && typeof(beforeAll) == 'function') {
+      beforeAll();
+    }
 
     /*
      * Take care of namespace (e.g. admin/users)

@@ -2,3 +2,5 @@
 test/dummy/tmp/
 test/dummy/log/
 coverage
+.DS_STORE
+test/dummy/db
