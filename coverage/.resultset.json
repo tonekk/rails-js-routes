@@ -1,0 +1,29 @@
+{
+  "Unit Tests": {
+    "coverage": {
+      "/Users/finn/dev/rails-js/test/dummy/app/helpers/application_helper.rb": [
+        1,
+        null
+      ],
+      "/Users/finn/dev/rails-js/test/dummy/app/helpers/testing_helper.rb": [
+        1,
+        null
+      ],
+      "/Users/finn/dev/rails-js/test/testing_controller_test.rb": [
+        1,
+        null,
+        1,
+        null,
+        null,
+        null,
+        1,
+        0,
+        null,
+        0,
+        null,
+        null
+      ]
+    },
+    "timestamp": 1413107994
+  }
+}
