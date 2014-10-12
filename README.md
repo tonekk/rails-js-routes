@@ -1,5 +1,9 @@
 rails-js
 ========
+[![Build Status](https://travis-ci.org/tonekk/rails.js.svg)](https://travis-ci.org/tonekk/rails.js)
+[![Dependency Status](http://img.shields.io/gemnasium/tonekk/rails.js.svg)](https://gemnasium.com/tonekk/rails.js)
+[![Gem Version](http://img.shields.io/gem/v/rails-js.svg)](https://rubygems.org/gems/rails-js)
+[![License](http://img.shields.io/:license-mit-blue.svg)](http://tonekk.mit-license.org)
 
 I worked on several Rails projects and there were many cases when it felt overkill to use a framework like ``Angular`` or ``Ember``, because javascript was only needed in some parts of the application.
 But by not using these frameworks I had to think of a way to *structure* the code by myself.
