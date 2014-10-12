@@ -1,3 +1,4 @@
 *.gem
 test/dummy/tmp/
 test/dummy/log/
+coverage
