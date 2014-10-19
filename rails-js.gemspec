@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.homepage      = 'http://rubygems.org/gems/rails-js'
   s.license       = 'MIT'
 
-  s.add_dependency "rails", "~> 4.1"
+  s.add_dependency "rails", "~> 4"
   s.add_development_dependency "sqlite3", "~> 1.3"
   s.add_development_dependency "teaspoon", "~> 0.8"
   s.add_development_dependency "poltergeist", "~> 1.5"

@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     rails-js (0.0.4)
-      rails (~> 4.1)
+      rails (~> 4)
 
 GEM
   remote: https://rubygems.org/
