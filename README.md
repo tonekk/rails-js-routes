@@ -33,7 +33,7 @@ Rails.app({
  helper: function() {
  }
 },
- // Put in initial data
+// Put in initial data
 {
   foo: 'bar'
 },
