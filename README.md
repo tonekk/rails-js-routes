@@ -22,7 +22,7 @@ I came up with the conclusion to organize the javascript code like the ruby code
 #### You start by creating an app.
 
 ```js
-//= rails
+//= require rails
 
 /*
  * app/assets/javascripts/application.js
@@ -65,7 +65,7 @@ Rails.controller('users', {
 },
 {
   // helpers here
-  function awesomeHelper() {
+  awesomeHelper: function() {
   }
 });
 
