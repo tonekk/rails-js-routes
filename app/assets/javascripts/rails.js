@@ -47,14 +47,23 @@
      * DOM-related js (e.g. javascript unit-tests).
      * Set Rails.config.test to disable action execution.
      */
-    document.addEventListener("DOMContentLoaded", function(event) {
+    listener = function(event) {
 
       if(Rails.config && Rails.config.test) {
         return;
       }
 
       Rails.execute();
-    });
+    };
+		
+		document.addEventListener("DOMContentLoaded", listener);
+		
+		/*
+		 * Add support to Turbolinks page changes
+		 */
+		if (typeof Turbolinks != 'undefined') {
+			document.addEventListener("page:load", listener);
+		}
   };
 
   /*
