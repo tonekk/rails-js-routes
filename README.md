@@ -139,7 +139,7 @@ In your layouts, put this line into the ``head``:
 ```erb
 <%= rails_js %>
 ```
-Also make sure to include ``rails`` in your ``application.js``.
+Also make sure to include ``rails`` in your ``application.js``. If you are using [Turbolinks](https://github.com/rails/turbolinks), make sure to include ``rails`` after ``turbolinks``.
 
 Testing
 =======
