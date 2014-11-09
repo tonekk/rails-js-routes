@@ -55,15 +55,15 @@
 
       Rails.execute();
     };
-		
-		document.addEventListener("DOMContentLoaded", listener);
-		
-		/*
-		 * Add support to Turbolinks page changes
-		 */
-		if (typeof Turbolinks != 'undefined') {
-			document.addEventListener("page:load", listener);
-		}
+
+    document.addEventListener("DOMContentLoaded", listener);
+
+    /*
+     * Add support to Turbolinks page changes
+     */
+    if(typeof Turbolinks !== 'undefined') {
+      document.addEventListener("page:load", listener);
+    }
   };
 
   /*
