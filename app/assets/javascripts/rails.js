@@ -194,7 +194,7 @@
     var steps = key.split('.'),
         step = data;
 
-    if(val) {
+    if(arguments.length == 2) {
       for(var i = 0; i < steps.length-1; i++) {
         if(!step[steps[i]]) {
           step[steps[i]] = {};
