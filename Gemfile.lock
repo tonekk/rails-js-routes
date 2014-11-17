@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rails-js (0.0.8)
+    rails-js (0.0.9)
       rails (~> 4)
 
 GEM
