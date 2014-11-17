@@ -27,7 +27,7 @@ I came up with the conclusion to organize the javascript code like the ruby code
 /*
  * app/assets/javascripts/application.js
  */
- 
+
 Rails.app({
  // Define global helpers here
  helper: function() {
@@ -57,7 +57,7 @@ Rails.controller('users', {
     // execute helper
     h.awesomeHelper();
   },
-  
+
   index: function(h) {
     // Do the same as in new()
     this.index(h);
@@ -78,17 +78,17 @@ Rails.controller('users', {
 /*
  * app/assets/javascripts/controllers/admin/users.js
  */
- 
+
 Rails.controller('admin/users', {
   new: function(h) {
     // Execute action of foreign controller
     R.action('users#new');
   },
-  
+
   index: function(h) {
     // Execute foreign helper with arguments
     R.helper('users', 'awesomeHelper', 1, 2, 3);
-    
+
     // Execute global helper with arguments
     R.global('helper', 1, 2, 3);
   }
@@ -118,7 +118,7 @@ console.log(R('a.global.variable'));
 /*
  * app/assets/javascripts/namespaces/admin.js
  */
- 
+
 Rails.namespace('admin', function() {
   // Will be executed on all admin routes (e.g. admin/users#new)
   console.log('Hello Mr. Admin');
@@ -126,7 +126,7 @@ Rails.namespace('admin', function() {
 ```
 
 #### For more info...
-...just read in ``app/assets/javascripts/rails.js``. I tried my best and documented nearly every line of code :) 
+...just read in ``app/assets/javascripts/rails.js``. I tried my best and documented nearly every line of code :)
 
 Installing
 ==========
@@ -152,3 +152,7 @@ Contributing
 ============
 
 [Fork](https://github.com/tonekk/rails-js/fork) -> Commit -> Pull Request
+
+This project uses the [Airbnb Styleguide](https://github.com/airbnb/javascript) as our coding guideline.
+We think this is a good piece of work and worth spreading.
+In case of any doubts refer to the style used around.
