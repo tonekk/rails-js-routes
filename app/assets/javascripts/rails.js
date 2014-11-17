@@ -49,7 +49,7 @@
      */
     listener = function(event) {
 
-      if(Rails.config && Rails.config.test) {
+      if (Rails.config && Rails.config.test) {
         return;
       }
 
@@ -61,8 +61,8 @@
     /*
      * Add support to Turbolinks page changes
      */
-    if(typeof Turbolinks !== 'undefined') {
-      document.addEventListener("page:load", listener);
+    if (typeof Turbolinks !== 'undefined') {
+      document.addEventListener('page:load', listener);
     }
   };
 
@@ -83,7 +83,7 @@
     /*
      * Should not be able to define controller (and helpers) twice
      */
-    if(controllers[name]) {
+    if (controllers[name]) {
       throw ['Controller \'', name,
              '\' is already defined! Please use a namespace'].join('');
     }
@@ -105,34 +105,34 @@
     /*
      * Make sure rails.js has been properly added to the layout
      */
-    if(!(this.config && this.config.controller && this.config.action)) {
+    if (!(this.config && this.config.controller && this.config.action)) {
 
       throw ['No action or controller given.',
              'It seems like you forgot to add rails.js to your layouts\' header.'].join(' ');
     }
 
-    var controller,
+    var controllerName = this.config.controller,
         namespaceHook,
-        controllerName = this.config.controller;
+        controller;
 
     /*
      * Execute beforeAll() hook if defined
      */
-    if(beforeAll && typeof(beforeAll) == 'function') {
+    if (beforeAll && typeof(beforeAll) == 'function') {
       beforeAll();
     }
 
     /*
      * Take care of namespace (e.g. admin/users)
      */
-    if(this.config.namespace) {
+    if (this.config.namespace) {
       controllerName = this.config.namespace + '/' + controllerName;
 
       /*
        * Execute namespace hook if we defined one
        */
       namespaceHook = namespaceHooks[this.config.namespace];
-      if(namespaceHook && typeof(namespaceHook) == 'function') {
+      if (namespaceHook && typeof(namespaceHook) == 'function') {
         namespaceHook();
       }
     }
@@ -141,7 +141,7 @@
      * Find controller and execute method
      */
     var controller = controllers[controllerName];
-    if(controller && controller[this.config.action] &&
+    if (controller && controller[this.config.action] &&
        typeof(controller[this.config.action]) == 'function') {
 
       controller[this.config.action](controller.helpers);
@@ -162,7 +162,7 @@
     /*
      * Should not be able to define controller (and helpers) twice
      */
-    if(namespaceHooks[name]) {
+    if (namespaceHooks[name]) {
       throw ['Namespace \'', name, '\' is already defined!'].join('');
     }
 
@@ -192,11 +192,12 @@
      *
      */
     var steps = key.split('.'),
-        step = data;
+        step = data,
+        i;
 
-    if(arguments.length == 2) {
-      for(var i = 0; i < steps.length-1; i++) {
-        if(!step[steps[i]]) {
+    if (arguments.length == 2) {
+      for (i = 0; i < steps.length-1; i++) {
+        if (!step[steps[i]]) {
           step[steps[i]] = {};
         }
 
@@ -206,9 +207,9 @@
       step[steps[steps.length -1]] = val;
 
     } else {
-      for(var i = 0; i < steps.length; i++) {
+      for (i = 0; i < steps.length; i++) {
         step = step[steps[i]];
-        if(!step) {
+        if (!step) {
           break;
         }
 
@@ -235,14 +236,14 @@
     /*
      * Treat 3rd argument as arguments for helper if it is an Array
      */
-    if(args.length == 1 && args[0] instanceof Array) {
+    if (args.length == 1 && args[0] instanceof Array) {
       args = args[0];
     }
 
     /*
      * Choose global helper if controllerName is not given
      */
-    if(controllerName) {
+    if (controllerName) {
       controller = controllers[controllerName];
       helper = controller.helpers[helperName];
     } else {
@@ -252,8 +253,8 @@
     /*
      * Make sure our helper exists
      */
-    if(!(helper && typeof(helper) == 'function')) {
-      if(controllerName) {
+    if (!(helper && typeof(helper) == 'function')) {
+      if (controllerName) {
         throw ['Helper \'', helperName, '\' not defined for controller \'',
                controllerName, '\''].join('');
       } else {
@@ -299,7 +300,7 @@
         controllerName = arguments[0],
         actionName = arguments[1];
 
-    if(action.indexOf('#') !== -1) {
+    if (action.indexOf('#') !== -1) {
       controllerName = action.split('#')[0];
       actionName = action.split('#')[1];
     }
@@ -309,10 +310,10 @@
      */
     controller = controllers[controllerName];
 
-    if(!controller) {
+    if (!controller) {
         throw ['Attempting to call action \'', controllerName, '#', actionName,
                '\', but Controller \'', controllerName, '\' is not defined!'].join('');
-    } else if(!controller[actionName] || !(typeof(controller[actionName]) == 'function')) {
+    } else if (!controller[actionName] || !(typeof(controller[actionName]) == 'function')) {
         throw ['Attempting to call action \'', controllerName, '#', actionName,
                '\', but Action \'', actionName, '\' is not defined!'].join('');
     }
