@@ -4,7 +4,7 @@ $:.push File.expand_path("../lib", __FILE__)
 require "rails/js/version"
 
 Gem::Specification.new do |s|
-  s.name          = 'rails-js'
+  s.name          = 'rails-js_route_dispatch'
   s.version       = Rails::JS::VERSION
   s.date          = Time.now.strftime("%Y-%m-%d")
   s.summary       = "A new approach to structure your javascript in non single-page Rails apps"
@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.email         = 'finn@heemeyer.net'
   s.files         = `git ls-files`.split("\n")
   s.require_paths = ['lib']
-  s.homepage      = 'http://rubygems.org/gems/rails-js'
+  s.homepage      = 'http://rubygems.org/gems/rails-js_route_dispatch'
   s.license       = 'MIT'
 
   s.add_dependency "rails", "~> 4"

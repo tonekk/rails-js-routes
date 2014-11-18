@@ -1,7 +1,7 @@
 module Rails
-  module JS
+  module JsRouteDispatch
     module ViewHelpers
-      def rails_js
+      def route_dispatch
 
         namespace = controller_path.split('/').reject do |el|
           el == controller_name

@@ -6,7 +6,7 @@
  */
 
 (function() {
-  describe('rails-js', function() {
+  describe('rails-js_route_dispatch', function() {
 
     /*
      * define all functions spied on
