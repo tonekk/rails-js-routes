@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rails-js (0.1.0)
+    rails-js_route_dispatch (0.1.0)
       rails (~> 4)
 
 GEM
@@ -122,6 +122,6 @@ PLATFORMS
 DEPENDENCIES
   coveralls (~> 0.7)
   poltergeist (~> 1.5)
-  rails-js!
+  rails-js_route_dispatch!
   sqlite3 (~> 1.3)
   teaspoon (~> 0.8)
