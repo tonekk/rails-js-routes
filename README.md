@@ -1,14 +1,14 @@
-rails-js_route_dispatch
+rails-js-routes
 ========
-[![Build Status](https://travis-ci.org/tonekk/rails-js_route_dispatch.svg)](https://travis-ci.org/tonekk/rails-js_route_dispatch)
-[![Dependency Status](https://gemnasium.com/tonekk/rails-js_route_dispatch.svg)](https://gemnasium.com/tonekk/rails-js_route_dispatch)
-[![Gem Version](http://img.shields.io/gem/v/rails-js_route_dispatch.svg)](https://rubygems.org/gems/rails-js_route_dispatch)
+[![Build Status](https://travis-ci.org/tonekk/rails-js-routes.svg)](https://travis-ci.org/tonekk/rails-js-routes)
+[![Dependency Status](https://gemnasium.com/tonekk/rails-js-routes.svg)](https://gemnasium.com/tonekk/rails-js-routes)
+[![Gem Version](http://img.shields.io/gem/v/rails-js-routes.svg)](https://rubygems.org/gems/rails-js-routes)
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://tonekk.mit-license.org)
 
 
 [Check out the blog post!](http://finn.heemeyer.net/2014/10/18/rails-js/)
 
-NOTICE: We decided to rename this gem from ``rails-js`` to ``rails-js_route_dispatch`` as it was nearly impossible to find.
+NOTICE: We decided to rename this gem from ``rails-js`` to ``rails-js-routes`` as it was nearly impossible to find.
 The name may be somewhat long, but for us it describes the functionality appropriate.
 
 
@@ -17,15 +17,15 @@ But by not using these frameworks I had to think of a way to *structure* the cod
 I came up with the conclusion to organize the javascript code like the ruby code is organized, that means: __Split up in controllers, which are split up in actions.__
 
 ## How it works
-* In ``rails-js_route_dispatch`` we are able to define ``controllers``, as well as ``helpers``.
+* In ``rails-js-routes`` we are able to define ``controllers``, as well as ``helpers``.
 * Controllers have ``actions`` which are executed when the matching rails action is executed.
 * Helpers should be clear. Pretty much like the rails helpers. There are helper per controller and global helpers.
-* The gem also provides a ``view helper`` to use in your layouts, which passes the routing information to ``rails-js_route_dispatch``.
+* The gem also provides a ``view helper`` to use in your layouts, which passes the routing information to ``rails-js-routes``.
 
 #### You start by creating an app.
 
 ```js
-//= require route_dispatch
+//= require routes
 
 /*
  * app/assets/javascripts/application.js
@@ -129,32 +129,32 @@ Rails.namespace('admin', function() {
 ```
 
 #### For more info...
-...just read in ``app/assets/javascripts/route_dispatch.js``. I tried my best and documented nearly every line of code :)
+...just read in ``app/assets/javascripts/routes.js``. I tried my best and documented nearly every line of code :)
 
 Installing
 ==========
 
 Install it as any other gem by putting this to your ``Gemfile``:
 ```ruby
-gem 'rails-js_route_dispatch'
+gem 'rails-js-routes'
 ```
 In your layouts, put this line into the ``head``:
 ```erb
-<%= route_dispatch %>
+<%= js_routes %>
 ```
-Also make sure to include ``route_dispatch`` in your ``application.js``. If you are using [Turbolinks](https://github.com/rails/turbolinks), make sure to include ``route_dispatch`` after ``turbolinks``.
+Also make sure to include ``routes`` in your ``application.js``. If you are using [Turbolinks](https://github.com/rails/turbolinks), make sure to include ``routes`` after ``turbolinks``.
 
 Testing
 =======
 
-Javascript tests are in ``test/dummy/spec/javascripts/rails-js_route_dispatch_spec.js``.
+Javascript tests are in ``test/dummy/spec/javascripts/rails-js-routes_spec.js``.
 They are executed using ``rake teaspoon`` (by using the [teaspoon runner](https://github.com/modeset/teaspoon)).
-I'm still trying to get [travis to execute the teaspoon tests properly...](https://travis-ci.org/tonekk/rails-js_route_dispatch/builds/37740824)
+I'm still trying to get [travis to execute the teaspoon tests properly...](https://travis-ci.org/tonekk/rails-js-routes/builds/37740824)
 
 Contributing
 ============
 
-[Fork](https://github.com/tonekk/rails-js_route_dispatch/fork) -> Commit -> Pull Request
+[Fork](https://github.com/tonekk/rails-js-routes/fork) -> Commit -> Pull Request
 
 This project uses the [Airbnb Styleguide](https://github.com/airbnb/javascript) as our coding guideline.
 We think this is a good piece of work and worth spreading.
