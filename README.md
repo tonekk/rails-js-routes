@@ -8,8 +8,7 @@ rails-js-routes
 
 [Check out the blog post!](http://finn.heemeyer.net/2014/10/18/rails-js/)
 
-NOTICE: We decided to rename this gem from ``rails-js`` to ``rails-js-routes`` as it was nearly impossible to find.
-The name may be somewhat long, but for us it describes the functionality appropriate.
+*NOTICE: We decided to rename this gem from ``rails-js`` to ``rails-js-routes`` as it was nearly impossible to find.*
 
 
 I worked on several Rails projects and there were many cases when it felt overkill to use a framework like ``Angular`` or ``Ember``, because javascript was only needed in some parts of the application.
