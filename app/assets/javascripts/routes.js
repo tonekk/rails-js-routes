@@ -140,7 +140,7 @@
     /*
      * Find controller and execute method
      */
-    var controller = controllers[controllerName];
+    controller = controllers[controllerName];
     if (controller && controller[this.config.action] &&
        typeof(controller[this.config.action]) == 'function') {
 
@@ -177,7 +177,8 @@
    * Also contains global helpers, so to prevent conflicts
    * we save global variables by using this singleton as a function.
    *
-   * R('foo'); // Gets window.R.data.foo
+   * R()              // Gets window.R.data
+   * R('foo');        // Gets window.R.data.foo
    * R('foo', 'bar'); // Sets window.R.data.foo
    */
   R = function(key, val) {
@@ -191,11 +192,34 @@
      * R('foo.bar.baz', 'foo');
      *
      */
-    var steps = key.split('.'),
-        step = data,
+
+    var steps,
+        step,
         i;
 
-    if (arguments.length == 2) {
+    // Return all global variables for empty call
+    if (arguments.length) {
+      steps = key.split('.');
+      step = data;
+    } else {
+      return data;
+    }
+
+    // Return value for `key`
+    if (arguments.length === 1) {
+      for (i = 0; i < steps.length; i++) {
+        step = step[steps[i]];
+        if (!step) {
+          break;
+        }
+
+      }
+      return step;
+    }
+
+    // Set value for `key`
+    // NOTE: Currently non-existing steps are created
+    if (arguments.length === 2) {
       for (i = 0; i < steps.length-1; i++) {
         if (!step[steps[i]]) {
           step[steps[i]] = {};
@@ -205,16 +229,7 @@
       }
 
       step[steps[steps.length -1]] = val;
-
-    } else {
-      for (i = 0; i < steps.length; i++) {
-        step = step[steps[i]];
-        if (!step) {
-          break;
-        }
-
-      }
-      return step;
+      return val;
     }
   };
 
@@ -313,7 +328,7 @@
     if (!controller) {
         throw ['Attempting to call action \'', controllerName, '#', actionName,
                '\', but Controller \'', controllerName, '\' is not defined!'].join('');
-    } else if (!controller[actionName] || !(typeof(controller[actionName]) == 'function')) {
+    } else if (!controller[actionName] || typeof(controller[actionName]) !== 'function') {
         throw ['Attempting to call action \'', controllerName, '#', actionName,
                '\', but Action \'', actionName, '\' is not defined!'].join('');
     }

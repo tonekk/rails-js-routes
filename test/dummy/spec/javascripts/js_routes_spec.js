@@ -6,7 +6,7 @@
  */
 
 (function() {
-  describe('rails-js_route_dispatch', function() {
+  describe('rails-js-routes', function() {
 
     /*
      * define all functions spied on
@@ -73,11 +73,12 @@
     });
 
     it('must handle global variables', function() {
-      R('a.global.variable', 'foo');
+      expect(R('a.global.variable', 'foo')).toBe('foo');
 
       expect(R('a')).toBeDefined();
       expect(R('a.global')).toBeDefined();
       expect(R('a.global.variable')).toBe('foo');
+      expect(R()).toEqual({foo: 'bar', a: {global: {variable: 'foo'}}});
     });
 
     it('must be able to execute global helpers', function() {
