@@ -16,7 +16,7 @@
   Rails = window.Rails || {};
 
   /*
-   * For testing. We want to start each test with emtpiness.
+   * For testing. We want to start each test with emptiness.
    */
   Rails.clear = function() {
     controllers = {};
