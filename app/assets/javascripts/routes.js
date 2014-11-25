@@ -118,7 +118,7 @@
     /*
      * Execute beforeAll() hook if defined
      */
-    if (beforeAll && typeof(beforeAll) == 'function') {
+    if (beforeAll && typeof(beforeAll) === 'function') {
       beforeAll();
     }
 
@@ -132,7 +132,7 @@
        * Execute namespace hook if we defined one
        */
       namespaceHook = namespaceHooks[this.config.namespace];
-      if (namespaceHook && typeof(namespaceHook) == 'function') {
+      if (namespaceHook && typeof(namespaceHook) === 'function') {
         namespaceHook();
       }
     }
@@ -142,7 +142,7 @@
      */
     controller = controllers[controllerName];
     if (controller && controller[this.config.action] &&
-       typeof(controller[this.config.action]) == 'function') {
+       typeof(controller[this.config.action]) === 'function') {
 
       controller[this.config.action](controller.helpers);
     }
@@ -197,7 +197,8 @@
         step,
         i;
 
-    // Return all global variables for empty call
+    // Prepare arguments for find/set routine
+    // Expose private scoped data attribute, if no arguments provided
     if (arguments.length) {
       steps = key.split('.');
       step = data;
@@ -220,7 +221,7 @@
     // Set value for `key`
     // NOTE: Currently non-existing steps are created
     if (arguments.length === 2) {
-      for (i = 0; i < steps.length-1; i++) {
+      for (i = 0; i < steps.length - 1; i++) {
         if (!step[steps[i]]) {
           step[steps[i]] = {};
         }
@@ -228,7 +229,7 @@
         step = step[steps[i]];
       }
 
-      step[steps[steps.length -1]] = val;
+      step[steps[steps.length - 1]] = val;
       return val;
     }
   };
@@ -243,15 +244,15 @@
    */
   R.helper = function(controllerName, helperName) {
 
-    var controller,
-        helper,
+    var args = Array.prototype.slice.call(arguments, 2),
+        controller,
         context,
-        args = Array.prototype.slice.call(arguments, 2);
+        helper;
 
     /*
      * Treat 3rd argument as arguments for helper if it is an Array
      */
-    if (args.length == 1 && args[0] instanceof Array) {
+    if (args.length === 1 && args[0] instanceof Array) {
       args = args[0];
     }
 
@@ -268,7 +269,7 @@
     /*
      * Make sure our helper exists
      */
-    if (!(helper && typeof(helper) == 'function')) {
+    if (!helper || typeof(helper) !== 'function') {
       if (controllerName) {
         throw ['Helper \'', helperName, '\' not defined for controller \'',
                controllerName, '\''].join('');
