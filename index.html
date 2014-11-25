@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=640">
+
+    <link rel="stylesheet" href="stylesheets/core.css" media="screen">
+    <link rel="stylesheet" href="stylesheets/mobile.css" media="handheld, only screen and (max-device-width:640px)">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+
+    <script type="text/javascript" src="javascripts/modernizr.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="javascripts/headsmart.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $('#main_content').headsmart()
+      })
+    </script>
+    <title>Rails::JS::Routes by tonekk</title>
+  </head>
+
+  <body>
+    <a id="forkme_banner" href="https://github.com/tonekk/rails-js-routes">View on GitHub</a>
+    <div class="shell">
+
+      <header>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <h1>Rails::JS::Routes</h1>
+            <h2>A new approach to structure your javascript in non single-page Rails apps</h2>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+      </header>
+
+      <section id="downloads">
+        <span class="inner">
+          <a href="https://github.com/tonekk/rails-js-routes/zipball/master" class="zip"><em>download</em> .ZIP</a><a href="https://github.com/tonekk/rails-js-routes/tarball/master" class="tgz"><em>download</em> .TGZ</a>
+        </span>
+      </section>
+
+
+      <span class="banner-fix"></span>
+
+
+      <section id="main_content">
+        <h1>
+<a id="rails-js-routes" class="anchor" href="#rails-js-routes" aria-hidden="true"><span class="octicon octicon-link"></span></a>rails-js-routes</h1>
+
+<p><a href="https://travis-ci.org/tonekk/rails-js-routes"><img src="https://travis-ci.org/tonekk/rails-js-routes.svg" alt="Build Status"></a>
+<a href="https://gemnasium.com/tonekk/rails-js-routes"><img src="https://gemnasium.com/tonekk/rails-js-routes.svg" alt="Dependency Status"></a>
+<a href="https://rubygems.org/gems/rails-js-routes"><img src="http://img.shields.io/gem/v/rails-js-routes.svg" alt="Gem Version"></a>
+<a href="http://tonekk.mit-license.org"><img src="http://img.shields.io/:license-mit-blue.svg" alt="License"></a></p>
+
+<p><a href="http://finn.heemeyer.net/2014/10/18/rails-js/">Check out the blog post!</a></p>
+
+<p><em>NOTICE: We decided to rename this gem from <code>rails-js</code> to <code>rails-js-routes</code> as it was nearly impossible to find.</em></p>
+
+<p>I worked on several Rails projects and there were many cases when it felt overkill to use a framework like <code>Angular</code> or <code>Ember</code>, because javascript was only needed in some parts of the application.
+But by not using these frameworks I had to think of a way to <em>structure</em> the code by myself.
+I came up with the conclusion to organize the javascript code like the ruby code is organized, that means: <strong>Split up in controllers, which are split up in actions.</strong></p>
+
+<h2>
+<a id="how-it-works" class="anchor" href="#how-it-works" aria-hidden="true"><span class="octicon octicon-link"></span></a>How it works</h2>
+
+<ul>
+<li>In <code>rails-js-routes</code> we are able to define <code>controllers</code>, as well as <code>helpers</code>.</li>
+<li>Controllers have <code>actions</code> which are executed when the matching rails action is executed.</li>
+<li>Helpers should be clear. Pretty much like the rails helpers. There are helper per controller and global helpers.</li>
+<li>The gem also provides a <code>view helper</code> to use in your layouts, which passes the routing information to <code>rails-js-routes</code>.</li>
+</ul>
+
+<h4>
+<a id="you-start-by-creating-an-app" class="anchor" href="#you-start-by-creating-an-app" aria-hidden="true"><span class="octicon octicon-link"></span></a>You start by creating an app.</h4>
+
+<div class="highlight highlight-js"><pre><span class="pl-c">//= require routes</span>
+
+<span class="pl-c">/*</span>
+<span class="pl-c"> * app/assets/javascripts/application.js</span>
+<span class="pl-c"> */</span>
+
+Rails.app({
+ <span class="pl-c">// Define global helpers here</span>
+ <span class="pl-en">helper</span>: <span class="pl-st">function</span>() {
+ }
+},
+<span class="pl-c">// Put in initial data</span>
+{
+  foo<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>bar<span class="pl-pds">'</span></span>
+},
+<span class="pl-c">// A function that is executed before every action</span>
+<span class="pl-st">function</span>() {
+ <span class="pl-en">console</span><span class="pl-s3">.log</span>(<span class="pl-s1"><span class="pl-pds">'</span>beforeAll() executed<span class="pl-pds">'</span></span>);
+});
+</pre></div>
+
+<h4>
+<a id="create-controllers-accordingly" class="anchor" href="#create-controllers-accordingly" aria-hidden="true"><span class="octicon octicon-link"></span></a>Create controllers accordingly.</h4>
+
+<div class="highlight highlight-js"><pre>
+<span class="pl-c">/*</span>
+<span class="pl-c"> * app/assets/javascripts/controllers/users.js</span>
+<span class="pl-c"> */</span>
+
+Rails.controller(<span class="pl-s1"><span class="pl-pds">'</span>users<span class="pl-pds">'</span></span>, {
+  <span class="pl-c">// actions here</span>
+  <span class="pl-en">new</span>: <span class="pl-st">function</span>(<span class="pl-vpf">h</span>) {
+    <span class="pl-c">// execute helper</span>
+    h.awesomeHelper();
+  },
+
+  <span class="pl-en">index</span>: <span class="pl-st">function</span>(<span class="pl-vpf">h</span>) {
+    <span class="pl-c">// Do the same as in new()</span>
+    <span class="pl-v">this</span>.<span class="pl-sc">index</span>(h);
+  }
+},
+{
+  <span class="pl-c">// helpers here</span>
+  <span class="pl-en">awesomeHelper</span>: <span class="pl-st">function</span>() {
+  }
+});
+</pre></div>
+
+<h4>
+<a id="use-code-from-other-controllers" class="anchor" href="#use-code-from-other-controllers" aria-hidden="true"><span class="octicon octicon-link"></span></a>Use code from other controllers.</h4>
+
+<div class="highlight highlight-js"><pre>
+<span class="pl-c">/*</span>
+<span class="pl-c"> * app/assets/javascripts/controllers/admin/users.js</span>
+<span class="pl-c"> */</span>
+
+Rails.controller(<span class="pl-s1"><span class="pl-pds">'</span>admin/users<span class="pl-pds">'</span></span>, {
+  <span class="pl-en">new</span>: <span class="pl-st">function</span>(<span class="pl-vpf">h</span>) {
+    <span class="pl-c">// Execute action of foreign controller</span>
+    R.<span class="pl-sc">action</span>(<span class="pl-s1"><span class="pl-pds">'</span>users#new<span class="pl-pds">'</span></span>);
+  },
+
+  <span class="pl-en">index</span>: <span class="pl-st">function</span>(<span class="pl-vpf">h</span>) {
+    <span class="pl-c">// Execute foreign helper with arguments</span>
+    R.helper(<span class="pl-s1"><span class="pl-pds">'</span>users<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>awesomeHelper<span class="pl-pds">'</span></span>, <span class="pl-c1">1</span>, <span class="pl-c1">2</span>, <span class="pl-c1">3</span>);
+
+    <span class="pl-c">// Execute global helper with arguments</span>
+    R.<span class="pl-sc">global</span>(<span class="pl-s1"><span class="pl-pds">'</span>helper<span class="pl-pds">'</span></span>, <span class="pl-c1">1</span>, <span class="pl-c1">2</span>, <span class="pl-c1">3</span>);
+  }
+},{});
+</pre></div>
+
+<h4>
+<a id="global-variables-without-the-mess" class="anchor" href="#global-variables-without-the-mess" aria-hidden="true"><span class="octicon octicon-link"></span></a>Global variables without the mess.</h4>
+
+<div class="highlight highlight-js"><pre><span class="pl-c">/*</span>
+<span class="pl-c"> * Use R singleton everywhere</span>
+<span class="pl-c"> */</span>
+
+<span class="pl-c">// Setting</span>
+R(<span class="pl-s1"><span class="pl-pds">'</span>answer<span class="pl-pds">'</span></span>, <span class="pl-c1">42</span>);
+<span class="pl-c">// Multiple levels</span>
+R(<span class="pl-s1"><span class="pl-pds">'</span>a.global.variable<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>foo<span class="pl-pds">'</span></span>);
+
+<span class="pl-c">// Getting</span>
+<span class="pl-en">console</span><span class="pl-s3">.log</span>(R(<span class="pl-s1"><span class="pl-pds">'</span>a.global.variable<span class="pl-pds">'</span></span>));</pre></div>
+
+<h4>
+<a id="define-hooks-for-namespaces" class="anchor" href="#define-hooks-for-namespaces" aria-hidden="true"><span class="octicon octicon-link"></span></a>Define hooks for namespaces.</h4>
+
+<div class="highlight highlight-js"><pre><span class="pl-c">/*</span>
+<span class="pl-c"> * app/assets/javascripts/namespaces/admin.js</span>
+<span class="pl-c"> */</span>
+
+Rails.namespace(<span class="pl-s1"><span class="pl-pds">'</span>admin<span class="pl-pds">'</span></span>, <span class="pl-st">function</span>() {
+  <span class="pl-c">// Will be executed on all admin routes (e.g. admin/users#new)</span>
+  <span class="pl-en">console</span><span class="pl-s3">.log</span>(<span class="pl-s1"><span class="pl-pds">'</span>Hello Mr. Admin<span class="pl-pds">'</span></span>);
+});</pre></div>
+
+<h4>
+<a id="for-more-info" class="anchor" href="#for-more-info" aria-hidden="true"><span class="octicon octicon-link"></span></a>For more info...</h4>
+
+<p>...just read in <code>app/assets/javascripts/routes.js</code>. I tried my best and documented nearly every line of code :)</p>
+
+<h1>
+<a id="installing" class="anchor" href="#installing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installing</h1>
+
+<p>Install it as any other gem by putting this to your <code>Gemfile</code>:</p>
+
+<div class="highlight highlight-ruby"><pre><span class="pl-k">gem</span> <span class="pl-s1"><span class="pl-pds">'</span>rails-js-routes<span class="pl-pds">'</span></span></pre></div>
+
+<p>In your layouts, put this line into the <code>head</code>:</p>
+
+<div class="highlight highlight-erb"><pre><span class="pl-pse">&lt;%=</span><span class="pl-s2"> js_routes </span><span class="pl-pse"><span class="pl-s2">%</span>&gt;</span></pre></div>
+
+<p>Also make sure to include <code>routes</code> in your <code>application.js</code>. If you are using <a href="https://github.com/rails/turbolinks">Turbolinks</a>, make sure to include <code>routes</code> after <code>turbolinks</code>.</p>
+
+<h1>
+<a id="testing" class="anchor" href="#testing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Testing</h1>
+
+<p>Javascript tests are in <code>test/dummy/spec/javascripts/rails-js-routes_spec.js</code>.
+They are executed using <code>rake teaspoon</code> (by using the <a href="https://github.com/modeset/teaspoon">teaspoon runner</a>).
+I'm still trying to get <a href="https://travis-ci.org/tonekk/rails-js-routes/builds/37740824">travis to execute the teaspoon tests properly...</a></p>
+
+<h1>
+<a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contributing</h1>
+
+<p><a href="https://github.com/tonekk/rails-js-routes/fork">Fork</a> -&gt; Commit -&gt; Pull Request</p>
+
+<p>This project uses the <a href="https://github.com/airbnb/javascript">Airbnb Styleguide</a> as our coding guideline.
+We think this is a good piece of work and worth spreading.
+In case of any doubts refer to the style used around.</p>
+      </section>
+
+      <footer>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <p>this project by <a href="https://github.com/tonekk">tonekk</a> can be found on <a href="https://github.com/tonekk/rails-js-routes">GitHub</a></p>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+        <p>Generated with <a href="http://pages.github.com">GitHub Pages</a> using Merlot</p>
+        <span class="octocat"></span>
+      </footer>
+
+    </div>
+
+    
+  </body>
+</html>
