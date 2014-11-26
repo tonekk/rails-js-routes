@@ -16,7 +16,7 @@
   Rails = window.Rails || {};
 
   /*
-   * For testing. We want to start each test with emtpiness.
+   * For testing. We want to start each test with emptiness.
    */
   Rails.clear = function() {
     controllers = {};
@@ -118,7 +118,7 @@
     /*
      * Execute beforeAll() hook if defined
      */
-    if (beforeAll && typeof(beforeAll) == 'function') {
+    if (beforeAll && typeof(beforeAll) === 'function') {
       beforeAll();
     }
 
@@ -132,7 +132,7 @@
        * Execute namespace hook if we defined one
        */
       namespaceHook = namespaceHooks[this.config.namespace];
-      if (namespaceHook && typeof(namespaceHook) == 'function') {
+      if (namespaceHook && typeof(namespaceHook) === 'function') {
         namespaceHook();
       }
     }
@@ -140,9 +140,9 @@
     /*
      * Find controller and execute method
      */
-    var controller = controllers[controllerName];
+    controller = controllers[controllerName];
     if (controller && controller[this.config.action] &&
-       typeof(controller[this.config.action]) == 'function') {
+       typeof(controller[this.config.action]) === 'function') {
 
       controller[this.config.action](controller.helpers);
     }
@@ -177,7 +177,8 @@
    * Also contains global helpers, so to prevent conflicts
    * we save global variables by using this singleton as a function.
    *
-   * R('foo'); // Gets window.R.data.foo
+   * R()              // Gets window.R.data
+   * R('foo');        // Gets window.R.data.foo
    * R('foo', 'bar'); // Sets window.R.data.foo
    */
   R = function(key, val) {
@@ -191,22 +192,22 @@
      * R('foo.bar.baz', 'foo');
      *
      */
-    var steps = key.split('.'),
-        step = data,
+
+    var steps,
+        step,
         i;
 
-    if (arguments.length == 2) {
-      for (i = 0; i < steps.length-1; i++) {
-        if (!step[steps[i]]) {
-          step[steps[i]] = {};
-        }
-
-        step = step[steps[i]];
-      }
-
-      step[steps[steps.length -1]] = val;
-
+    // Prepare arguments for find/set routine
+    // Expose private scoped data attribute, if no arguments provided
+    if (arguments.length) {
+      steps = key.split('.');
+      step = data;
     } else {
+      return data;
+    }
+
+    // Return value for `key`
+    if (arguments.length === 1) {
       for (i = 0; i < steps.length; i++) {
         step = step[steps[i]];
         if (!step) {
@@ -215,6 +216,21 @@
 
       }
       return step;
+    }
+
+    // Set value for `key`
+    // NOTE: Currently non-existing steps are created
+    if (arguments.length === 2) {
+      for (i = 0; i < steps.length - 1; i++) {
+        if (!step[steps[i]]) {
+          step[steps[i]] = {};
+        }
+
+        step = step[steps[i]];
+      }
+
+      step[steps[steps.length - 1]] = val;
+      return val;
     }
   };
 
@@ -228,15 +244,15 @@
    */
   R.helper = function(controllerName, helperName) {
 
-    var controller,
-        helper,
+    var args = Array.prototype.slice.call(arguments, 2),
+        controller,
         context,
-        args = Array.prototype.slice.call(arguments, 2);
+        helper;
 
     /*
      * Treat 3rd argument as arguments for helper if it is an Array
      */
-    if (args.length == 1 && args[0] instanceof Array) {
+    if (args.length === 1 && args[0] instanceof Array) {
       args = args[0];
     }
 
@@ -253,7 +269,7 @@
     /*
      * Make sure our helper exists
      */
-    if (!(helper && typeof(helper) == 'function')) {
+    if (!helper || typeof(helper) !== 'function') {
       if (controllerName) {
         throw ['Helper \'', helperName, '\' not defined for controller \'',
                controllerName, '\''].join('');
@@ -313,7 +329,7 @@
     if (!controller) {
         throw ['Attempting to call action \'', controllerName, '#', actionName,
                '\', but Controller \'', controllerName, '\' is not defined!'].join('');
-    } else if (!controller[actionName] || !(typeof(controller[actionName]) == 'function')) {
+    } else if (!controller[actionName] || typeof(controller[actionName]) !== 'function') {
         throw ['Attempting to call action \'', controllerName, '#', actionName,
                '\', but Action \'', actionName, '\' is not defined!'].join('');
     }
