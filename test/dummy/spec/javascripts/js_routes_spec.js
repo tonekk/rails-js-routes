@@ -162,5 +162,26 @@
       Rails.execute();
       expect(spies.namespaceHook).toHaveBeenCalled();
     });
+
+    it('must set Rails.config if link supplied', function() {
+      // Set config normally set by view_helper
+      Rails.config = {
+        controller: 'entities',
+        action: 'new'
+      };
+
+      Rails.controller('admin/users', {
+        index: spies.adminUsersIndex
+      });
+
+      var configLink = document.createElement('a');
+      configLink.attributes['data-action'] = 'index';
+      configLink.attributes['data-controller'] = 'users';
+      configLink.attributes['data-namespace'] = 'admin';
+
+      Rails.execute(configLink);
+
+      expect(spies.adminUsersIndex).toHaveBeenCalled();
+    });
   });
 })();

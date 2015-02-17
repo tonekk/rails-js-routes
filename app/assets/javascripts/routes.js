@@ -8,7 +8,18 @@
       globalHelpers = {},
       namespaceHooks = {},
       data = {},
-      beforeAll = null;
+      beforeAll = null,
+      isDOMElement;
+
+  /*
+   * Helper function, returns true if o is a DOMElement
+   */
+  function isDOMElement(el) {
+    return (
+      typeof HTMLElement === "object" ? el instanceof HTMLElement :
+      el && typeof el === "object" && el !== null && el.nodeType === 1 && typeof el.nodeName=== "string"
+    );
+  };
 
   /*
    * Singleton that stores functions to create your apps' structure
@@ -99,8 +110,18 @@
    * Execute the actual controller action.
    * e.g. will execute controller.users.index()
    * when on #users/index
+   *
+   * It is also possible to supply a link with
+   * data-action, data-controller and data-namespace attributes
+   * to set Rails.config before execution
+   *
+   * Furthermore putting 'false' as first argument will only execute beforeAll()
    */
   Rails.execute = function() {
+
+    var controllerName,
+        namespaceHook,
+        controller;
 
     /*
      * Make sure rails.js has been properly added to the layout
@@ -111,16 +132,23 @@
              'It seems like you forgot to add rails.js to your layouts\' header.'].join(' ');
     }
 
-    var controllerName = this.config.controller,
-        namespaceHook,
-        controller;
-
     /*
      * Execute beforeAll() hook if defined
      */
     if (beforeAll && typeof(beforeAll) === 'function') {
       beforeAll();
     }
+
+    /*
+     * Set config if link is passed as first argument
+     */
+    if (arguments.length == 1 && isDOMElement(arguments[0])) {
+      this.config.action = arguments[0].attributes['data-action'];
+      this.config.controller = arguments[0].attributes['data-controller'];
+      this.config.namespace = arguments[0].attributes['data-namespace'];
+    }
+
+    controllerName = this.config.controller;
 
     /*
      * Take care of namespace (e.g. admin/users)
