@@ -183,5 +183,12 @@
 
       expect(spies.adminUsersIndex).toHaveBeenCalled();
     });
+
+    it('wont call controller action if Rails.execute called with false', function() {
+      Rails.execute(false);
+      expect(spies.usersIndex).not.toHaveBeenCalled();
+      Rails.execute();
+      expect(spies.usersIndex).toHaveBeenCalled();
+    });
   });
 })();

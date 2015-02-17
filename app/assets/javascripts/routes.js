@@ -146,6 +146,11 @@
       this.config.action = arguments[0].attributes['data-action'];
       this.config.controller = arguments[0].attributes['data-controller'];
       this.config.namespace = arguments[0].attributes['data-namespace'];
+    } else if (arguments[0] === false) {
+      /*
+       * Break if false if passed as first argument
+       */
+      return;
     }
 
     controllerName = this.config.controller;
