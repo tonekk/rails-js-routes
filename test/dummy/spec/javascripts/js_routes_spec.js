@@ -175,9 +175,9 @@
       });
 
       var configLink = document.createElement('a');
-      configLink.attributes['data-action'] = 'index';
-      configLink.attributes['data-controller'] = 'users';
-      configLink.attributes['data-namespace'] = 'admin';
+      configLink.setAttribute('data-action', 'index');
+      configLink.setAttribute('data-controller', 'users');
+      configLink.setAttribute('data-namespace', 'admin');
 
       Rails.execute(configLink);
 
