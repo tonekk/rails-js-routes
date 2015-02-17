@@ -12,7 +12,7 @@
       isDOMElement;
 
   /*
-   * Helper function, returns true if o is a DOMElement
+   * Helper function, returns true if el is a DOMElement
    */
   function isDOMElement(el) {
     return (
