@@ -143,9 +143,9 @@
      * Set config if link is passed as first argument
      */
     if (arguments.length == 1 && isDOMElement(arguments[0])) {
-      this.config.action = arguments[0].attributes['data-action'];
-      this.config.controller = arguments[0].attributes['data-controller'];
-      this.config.namespace = arguments[0].attributes['data-namespace'];
+      this.config.action = arguments[0].getAttribute('data-action');
+      this.config.controller = arguments[0].getAttribute('data-controller');
+      this.config.namespace = arguments[0].getAttribute('data-namespace');
     } else if (arguments[0] === false) {
       /*
        * Break if false if passed as first argument
