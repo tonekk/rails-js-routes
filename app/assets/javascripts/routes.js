@@ -124,19 +124,19 @@
         controller;
 
     /*
+     * Execute beforeAll() hook if defined
+     */
+    if (beforeAll && typeof(beforeAll) === 'function') {
+      beforeAll();
+    }
+
+    /*
      * Make sure rails.js has been properly added to the layout
      */
     if (!(this.config && this.config.controller && this.config.action)) {
 
       return console.log(['No action or controller given.',
                           'It seems like you forgot to add rails.js to your layouts\' header.'].join(' '));
-    }
-
-    /*
-     * Execute beforeAll() hook if defined
-     */
-    if (beforeAll && typeof(beforeAll) === 'function') {
-      beforeAll();
     }
 
     /*
