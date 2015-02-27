@@ -128,8 +128,8 @@
      */
     if (!(this.config && this.config.controller && this.config.action)) {
 
-      throw ['No action or controller given.',
-             'It seems like you forgot to add rails.js to your layouts\' header.'].join(' ');
+      return console.log(['No action or controller given.',
+                          'It seems like you forgot to add rails.js to your layouts\' header.'].join(' '));
     }
 
     /*
