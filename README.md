@@ -5,9 +5,6 @@ rails-js-routes
 [![Gem Version](http://img.shields.io/gem/v/rails-js-routes.svg)](https://rubygems.org/gems/rails-js-routes)
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://tonekk.mit-license.org)
 
-
-[Check out the blog post!](http://finn.heemeyer.net/2014/10/18/rails-js/)
-
 *NOTICE: We decided to rename this gem from ``rails-js`` to ``rails-js-routes`` as it was nearly impossible to find.*
 
 
@@ -31,9 +28,9 @@ I came up with the conclusion to organize the javascript code like the ruby code
  */
 
 Rails.app({
- // Define global helpers here
- helper: function() {
- }
+  // Define global helpers here
+  helper: function() {
+  }
 },
 // Put in initial data
 {
@@ -41,7 +38,7 @@ Rails.app({
 },
 // A function that is executed before every action
 function() {
- console.log('beforeAll() executed');
+  console.log('beforeAll() executed');
 });
 
 ```
